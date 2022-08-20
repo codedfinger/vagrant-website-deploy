@@ -68,4 +68,11 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   config.vm.network "private_network", type: "dhcp"
+# provision server with automation
+config.vm.provision "shell", inline: <<-END
+apt update
+apt install -y apache2
+cp -r /vagrant/webcontent/* /var/www/html/
+echo "Machine provisioned at $(date)! Welcome!"
+END
 end
